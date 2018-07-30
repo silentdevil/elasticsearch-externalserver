@@ -2,7 +2,6 @@ package com.gofluent.elasticsearch.service.impl;
 
 import com.gofluent.elasticsearch.service.SearchObjectService;
 import com.gofluent.elasticsearch.model.SearchObject;
-import com.gofluent.elasticsearch.repository.SearchObjectRepository;
 import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -13,19 +12,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class SearchObjectServiceImpl implements SearchObjectService {
 
     @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
-
-    @Autowired
-    private SearchObjectRepository searchObjectRepository;
 
     @Override
     public Page<SearchObject> findByKeyword(String keyword, Pageable pageable) {
@@ -45,12 +38,7 @@ public class SearchObjectServiceImpl implements SearchObjectService {
         return elasticsearchTemplate.queryForPage(build, SearchObject.class);
     }
 
-    @Override
-    public List<SearchObject> getAll() {
-        List<SearchObject> searchObjects = new ArrayList<>();
-        searchObjectRepository.findAll().forEach(searchObjects::add);
-        return searchObjects;
-    }
+
 
     private QueryBuilder buildQueryWithKeyword(String keyword) {
         return QueryBuilders.boolQuery().should(QueryBuilders.queryStringQuery(keyword)

@@ -47,9 +47,4 @@ public class SearchController {
                                            @PathVariable int start, @PathVariable int end) throws UnsupportedEncodingException {
         return searchObjectService.findByKeywordAndType( URLDecoder.decode(keyword,"UTF-8"), type, new PageRequest(start, end)).getContent();
     }
-
-    @RequestMapping(value = "/search/all")
-    public List<SearchObject> findAll() throws UnsupportedEncodingException {
-        return searchObjectService.getAll();
-    }
 }

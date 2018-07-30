@@ -26,7 +26,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.gofluent.elasticsearch</groupId>
-			<artifactId>repository</artifactId>
+			<artifactId>model</artifactId>
 			<version>1</version>
 		</dependency>
 	</dependencies>

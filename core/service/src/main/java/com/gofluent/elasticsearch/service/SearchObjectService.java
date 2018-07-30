@@ -10,5 +10,4 @@ import java.util.List;
 public interface SearchObjectService {
     Page<SearchObject> findByKeyword(String keyword, Pageable pageable);
     Page<SearchObject> findByKeywordAndType(String keyword, String type, Pageable pageable);
-    List<SearchObject> getAll();
 }
